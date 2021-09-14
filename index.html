@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Canvas</title>
+    <style>
+        #myCanvas {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+
+    <script>
+        //获取canvas标签
+        var myCanvas = document.querySelector('#myCanvas')
+        //获取2D上下文
+        var context = myCanvas.getContext('2d')
+        // console.log(context);
+
+        //宽高处理
+        function resizeFun() {
+            var pageWidth = document.documentElement.clientWidth
+            var pageHeight = document.documentElement.clientHeight
+
+            myCanvas.width = pageWidth
+            myCanvas.height = pageHeight
+        }
+
+        resizeFun()
+
+        window.onresize = function () {
+            resizeFun()
+        }
+        //宽高处理
+
+
+        //画圈函数，使用fill实现画一个实心弧，即圆
+        function drawCircle(x, y, radius) {
+            context.beginPath()
+            context.arc(x, y, radius, 0, Math.PI * 2)
+            context.fill()
+            //封闭新路径
+            context.closePath()
+        }
+
+        //标志位，置为fale则不能画圆
+        var paintting = false;
+
+        //指定起始位置
+        var lastPoint = { x: undefined, y: undefined }
+
+        //鼠标按下时，画初始位置的圆
+        myCanvas.onmousedown = function (e) {
+            paintting = true;
+            var x = e.clientX;
+            var y = e.clientY;
+            lastPoint = { x: x, y: y }
+            drawCircle(x, y, 1);
+        }
+
+        //鼠标移动时，一边画圆，一边画线把圆形连接起来
+        //如果只画线，则只能画出一根根直挺挺的直线
+        myCanvas.onmousemove = function (e) {
+            if (paintting) {
+                var x = e.clientX
+                var y = e.clientY
+                var newPoint = { x: x, y: y }
+                drawCircle(x, y, 1)
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                //更新参考point，使得每次画线的起点变为上一次画线的终点
+                //避免出现画出满屏黑线链接起始点的不规则图形
+                lastPoint = newPoint
+            }
+
+        }
+
+        //鼠标抬起停止画圆画线
+        myCanvas.onmouseup = function (e) {
+            paintting = false
+        }
+
+        //画线函数
+        function drawLine(x1, y1, x2, y2) {
+            context.beginPath()
+            //起点
+            context.moveTo(x1, y1)
+            context.lineWidth = 5
+            //线终点
+            context.lineTo(x2, y2)
+            context.stroke()
+            context.closePath()
+        }
+        //画线函数
+    </script>
+
+</body>
+
+</html>
