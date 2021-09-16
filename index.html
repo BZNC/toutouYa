@@ -7,17 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>totoYa canvas</title>
     <style>
+        /* 清除默认样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        #canvasWrap {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: pink;
+        body {
+            overflow: hidden;
+        }
+        /* 设置字体图表统一样式 */
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        #myCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: red;
         }
 
         h1 {
@@ -27,23 +40,138 @@
             border: 5px solid red;
         }
 
-        #myCanvas {
-            position: absolute;
+        #ooptions {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 10px;
+        }
+
+        #ooptions>ul {
+            display: inline-flex;
+            list-style: none;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #ooptions li {
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        /* 设置颜色下li的样式start */
+        ul#color>li {
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: all 0.2s ease-out;
+        }
+
+        /* 设置颜色下li的样式end */
+
+
+        /* 定义画笔颜色start */
+        li#black {
+            background-color: black;
+        }
+
+        li#red {
+            background-color: red;
+        }
+
+        li#green {
             background-color: green;
         }
+
+        li#blue {
+            background-color: blue;
+        }
+
+        /* 定义画笔颜色end */
+
+        /* 定义画笔li样式start */
+        ul#thickness>li {
+            margin: 6px;
+            height: 20px;
+            background-color: black;
+        }
+
+        /* 定义画笔li样式end */
+
+
+        /* 定义画笔粗细start */
+        li#thin {
+            width: 2px;
+        }
+
+        li#middle {
+            width: 6px;
+        }
+
+        li#thick {
+            width: 10px;
+        }
+
+        /* 定义画笔粗细end */
     </style>
+
+    <!-- 引入字体文件 -->
+    <script src="https://at.alicdn.com/t/font_2818467_c3a6bvynay.js"></script>
 </head>
 
 <body>
+    <canvas id="myCanvas"></canvas>
 
 
-    <div id="canvasWrap">
+    <!-- 控制区start -->
+    <div id="ooptions">
+        <!-- 画笔颜色 -->
+        <ul id="color" class="active">
+            <li id="black" class="active"></li>
+            <li id="red"></li>
+            <li id="green"></li>
+            <li id="blue"></li>
+        </ul>
+        <!-- 画笔颜色 -->
 
-        <h1>透透鸦--简约canvas画板</h1>
+        <!-- 画笔粗细 -->
+        <ul id="thickness" class="active">
+            <li id="thin" class="active"></li>
+            <li id="middle"></li>
+            <li id="thick"></li>
+        </ul>
+        <!-- 画笔粗细 -->
 
-        <canvas id="myCanvas"></canvas>
+        <!-- 画笔,橡皮擦,清除,保存 -->
+        <ul id="actions">
+            <li>
+                <svg id="pen" class="icon">
+                    <use xlink:href="#icon-edit"></use>
+                </svg>
+            </li>
+            <li>
+                <svg id="eraser" class="icon">
+                    <use xlink:href="#icon-eraser"></use>
+                </svg>
+            </li>
+            <li>
+                <svg id="clearall" class="icon">
+                    <use xlink:href="#icon-delete"></use>
+                </svg>
+            </li>
+            <li>
+                <svg id="save" class="icon">
+                    <use xlink:href="#icon-download"></use>
+                </svg>
+            </li>
+        </ul>
+        <!-- 画笔橡皮擦清除保存 -->
 
     </div>
+    <!-- 控制区end -->
+
+
 
 
 
@@ -55,11 +183,13 @@
 
         //自动宽高处理
         function resizeFun() {
-            var pageWidth = canvasWrap.offsetWidth
-            var pageHeight = (document.querySelector('#canvasWrap').offsetHeight) - (document.querySelector('h1').offsetHeight)
+            myCanvas.height = document.documentElement.offsetHeight
+        console.log( document.documentElement)
 
-            myCanvas.width = pageWidth
-            myCanvas.height = pageHeight
+
+            myCanvas.width = document.documentElement.offsetWidth
+        console.log( myCanvas.width)
+
         }
         resizeFun()
         window.onresize = function () {
@@ -88,6 +218,9 @@
             paintting = true
             var x = e.offsetX
             var y = e.offsetY
+            console.log(x)
+            console.log(y)
+
             lastPoint = { x: x, y: y }
             drawCircle(x, y, 1)
         }
