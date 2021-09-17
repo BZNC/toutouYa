@@ -17,6 +17,7 @@
         body {
             overflow: hidden;
         }
+
         /* 设置字体图表统一样式 */
         .icon {
             width: 1em;
@@ -183,19 +184,14 @@
 
         //自动宽高处理
         function resizeFun() {
-            myCanvas.height = document.documentElement.offsetHeight
-        console.log( document.documentElement)
-
-
-            myCanvas.width = document.documentElement.offsetWidth
-        console.log( myCanvas.width)
-
+            myCanvas.height = document.documentElement.clientHeight
+            myCanvas.width = document.documentElement.clientWidth
         }
         resizeFun()
         window.onresize = function () {
             resizeFun()
         }
-        //宽高处理
+        //自动宽高处理
 
 
         //画圈函数，使用fill实现画一个360度实心弧，即圆
