@@ -1,0 +1,131 @@
+/* 清除默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+}
+
+/* 设置字体图标统一样式 */
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+/* 设置字体图标统一样式 */
+
+#myCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+h1 {
+    height: 90px;
+    line-height: 80px;
+    text-align: center;
+    border: 5px solid red;
+}
+
+#ooptions {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+#ooptions>ul {
+    display: inline-flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#ooptions li {
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* 设置颜色下li的样式start */
+ul#color>li {
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    transition: all 0.2s ease-out;
+}
+
+/* 设置颜色下li的样式end */
+
+
+/* 定义画笔颜色start */
+li#black {
+    background-color: black;
+}
+
+li#red {
+    background-color: red;
+}
+
+li#green {
+    background-color: green;
+}
+
+li#blue {
+    background-color: blue;
+}
+
+/* 定义画笔颜色end */
+
+/* 定义画笔li样式start */
+ul#thickness>li {
+    margin: 6px;
+    height: 20px;
+    background-color: black;
+}
+
+/* 定义画笔li样式end */
+
+
+/* 定义画笔粗细start */
+
+li#thin {
+    width: 2px;
+}
+
+li#middle {
+    width: 6px;
+}
+
+li#thick {
+    width: 10px;
+}
+
+/* 定义画笔粗细end */
+
+ul#color > li.active,
+ul#thickness > li.active{
+  transform: scale(1.15);
+  box-shadow: 0 0 8px rgba(80, 80, 80, 0.8);
+}
+
+
+/* 定义功能区样式start */
+ul#actions svg {
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s;
+}
+
+ul#actions svg.active {
+    transform: scale(1.25);
+    fill: red;
+}
+/* 定义功能区样式end */
+
+
