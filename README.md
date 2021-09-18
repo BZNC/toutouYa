@@ -25,4 +25,4 @@
 
 支持桌面端，移动端正在开发中。
 
-链接：[点我访问](www.baidu.com)
+链接：[点我访问](https://bznc.github.io/toutouYa/)
