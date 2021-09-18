@@ -19,7 +19,6 @@ window.onresize = function () {
 var useing = false;
 var eraserEnabled = false
 
-
 /*********************************** 绘画方法 Start**********************************/
 //初始化数值
 context.strokeStyle = "black"
